@@ -10,3 +10,10 @@ if (iNum == iDiv2*2){
 else{
     Console.WriteLine("Введено нечетное число");
 }
+
+if (iNum%2 == 0){
+    Console.WriteLine("Введено четное число");
+}
+else{
+    Console.WriteLine("Введено нечетное число");
+}
