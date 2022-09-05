@@ -5,7 +5,7 @@
 */
 
 //объявление методов и функций
-int CalcOddElements(int[] mass){    //функция подсчета четных элементов массива
+int CalcEvenElements(int[] mass){    //функция подсчета четных элементов массива
     int iRes=0;
     for (int i=0; i<mass.Length; i++) if (mass[i]%2==0) iRes++;
     return iRes;
@@ -36,5 +36,5 @@ else{
     //вывод массива
     PrintArray(array, ", ");
     //вывод числа четных элементов
-    Console.WriteLine($" -> {CalcOddElements(array)}");
+    Console.WriteLine($" -> {CalcEvenElements(array)}");
 }
