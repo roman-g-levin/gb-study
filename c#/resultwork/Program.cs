@@ -6,7 +6,7 @@
 */
 
 // Объявление исходного массива
-string[] source = {"единицы","десятки","сотни","тысячи", "1", ":-)","New York","-2","Windows"};
+string[] source = { "единицы", "десятки", "сотни", "тысячи", "1", ":-)", "New York", "-2", "Windows" };
 
 // Объявление методов и функций
 // Вывод массива
@@ -16,9 +16,21 @@ void PrintArray(string[] m)
         Console.Write($"\"{m[x]}\" ");
     Console.WriteLine();
 }
-string[] copyStringsBelowOrEqual3InNewArray(string[] strArray){
-    string[] newArray = new string[0];
-    
+string[] copyStringsBelowOrEqual3InNewArray(string[] strArray)
+{
+    // Определяем количество строк, удовлетворяющих условию
+    int k = 0;
+    for (int i = 0; i < strArray.Length; i++)
+        if (strArray[i].Length <= 3) k++;
+
+    // Создаем массив для результата
+    string[] newArray = new string[k];
+
+    // Копирование в результирующий массив строк, удовлетворяющих условию
+    k = 0;
+    for (int i = 0; i < strArray.Length; i++)
+        if (strArray[i].Length <= 3) newArray[k++]=strArray[i];
+
     return newArray;
 }
 
@@ -30,7 +42,7 @@ Console.WriteLine("Исходный массив строк:");
 PrintArray(source);
 
 // Создать новый массив с результатом
-string[] target=copyStringsBelowOrEqual3InNewArray(source);
+string[] target = copyStringsBelowOrEqual3InNewArray(source);
 
 // Показать результат
 Console.WriteLine("Результирующий массив строк:");
