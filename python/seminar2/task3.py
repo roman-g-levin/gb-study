@@ -16,3 +16,4 @@ else:
     for i in range(1, n+1):
         list.append(round((1+1/i)**i, 2))
     print(list)
+    print(f'Сумма элементов списка: {sum(list)}')
