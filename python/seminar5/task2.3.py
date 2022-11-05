@@ -36,7 +36,9 @@ while konf > 0:
     if player == 'человек':
         pget = int(input(f'Введите число конфет, которое взял {player}:'))
     else:
-        pget = konf % 29
+        pget = konf % 29    # хотим взять вот столько
+        if pget < 1 or pget > max_pget:
+            pget = random.randint(1, max_pget)  # если не можем взять сколько хотим, берем случайное число
         print(f'Бот взял {pget} конфет')
     if pget > max_pget or pget < 1:
         print('Неверный ввод')
