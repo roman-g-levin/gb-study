@@ -16,10 +16,20 @@ def show_employees():
        
 
 def show_employees_in_department():
+    """функция вывода списка сотрудников отдела по номеру отдела"""
     department_id = int(input("Введите id отдела: "))
-    # TODO: обработка случая, если id отдела некорректный
-    department = [d for d in departments if d["id"] == department_id][0]
-    print("empolyees ids: ", department["employees"])
+    flag_not_found=True
+    for department in departments:
+        if department["id"] == department_id:
+            flag_not_found=False
+            print(f'Список сотрудников отдела {department["name"]}')
+            print('Номер\tСотрудник')
+            for employee in department["employees"]:
+                empl = [e for e in employees if e["id"]==employee]
+                print(f' {empl[0]["id"]}\t{empl[0]["fio"]}')
+            break
+    if flag_not_found:
+        print(' Не найден номер отдела!')
 
 
 def menu():
