@@ -26,7 +26,6 @@ def add_department(name):
 
 def del_department(id):
     """функция удаления отдела"""
-
     for i in range(len(departments)):
         not_found_flag = True
         if departments[i]["id"] == id:
@@ -66,6 +65,26 @@ def move_user(combo):
             dep["employees"].append(emp_id)
             break
     save_base_to_csv()
+
+def del_user(emp_id):
+    """функция удаления пользователя"""
+    for dep in departments:
+        for i in dep["employees"]:
+            if i==emp_id:
+                dep["employees"].remove(emp_id)
+    for i in range(len(employees)):
+        not_found_flag = True
+        if employees[i]["id"] == emp_id:
+            not_found_flag = False
+            employees.pop(i)
+            break
+
+    if not_found_flag:
+        pass
+        #ui.ui_view.display_message("Неверно указан код сотрудника")
+    else:
+        pass
+        save_base_to_csv()
 
 
 def save_base_to_csv(filename='organisation.csv'):

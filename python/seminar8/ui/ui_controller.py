@@ -1,5 +1,5 @@
-from models import add_department, del_department, load_base_from_csv, add_user, move_user
-from .ui_view import show_departments, show_employees, menu, show_employees_in_department, input_department, input_no_department, input_username_and_other, input_employee_id
+from models import add_department, del_department, load_base_from_csv, add_user, move_user, del_user
+from .ui_view import show_departments, show_employees, menu, show_employees_in_department, input_department, input_no_department, input_username_and_other, input_employee_id, input_employee_id_and_dep
 
 MENU_ACTIONS = {
     1: ["Вывести список отделов", show_departments],
@@ -8,8 +8,8 @@ MENU_ACTIONS = {
     4: ["Добавить отдел", input_department, add_department],
     5: ["Удалить отдел", input_no_department, del_department],
     6: ["Добавить сотрудника", input_username_and_other, add_user],
-    7: ["Переместить сотрудника в другой отдел", input_employee_id, move_user],
-    8: ["Удалить сотрудника", lambda: print("todo")],
+    7: ["Переместить сотрудника в другой отдел", input_employee_id_and_dep, move_user],
+    8: ["Удалить сотрудника", input_employee_id, del_user],
     0: ["Выход", lambda: None]
 }
 
