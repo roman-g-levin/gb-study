@@ -63,6 +63,12 @@ def input_username_and_other():
     return fio, department_id, salary
 
 
+def input_employee_id():
+    """ввод id сотрудника и id нового отдела"""
+    employee_id = int(input("Введите id сотрудника: "))
+    department_id = int(input("Введите id нового отдела: "))
+    return employee_id, department_id
+
 def display_message(txt):
     """функция вывода текста"""
     print(txt)

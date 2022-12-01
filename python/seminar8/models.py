@@ -55,6 +55,18 @@ def add_user(combo):
             break
     save_base_to_csv()
 
+def move_user(combo):
+    emp_id, new_dep_id=combo
+    for dep in departments:
+        for i in dep["employees"]:
+            if i==emp_id:
+                dep["employees"].remove(emp_id)
+    for dep in departments:
+        if dep["id"]==new_dep_id:
+            dep["employees"].append(emp_id)
+            break
+    save_base_to_csv()
+
 
 def save_base_to_csv(filename='organisation.csv'):
     """функция записи всей базы отделов и сотрудников в файл"""
