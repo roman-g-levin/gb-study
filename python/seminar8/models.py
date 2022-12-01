@@ -1,5 +1,6 @@
 """в этом файле описана модель, управление данными в модели
 созранение и загрузка данных"""
+import os.path
 
 employees = [
     {"id": 1, "fio": "ivan petrov", "salary": 40},
@@ -31,3 +32,20 @@ def save_base_to_csv(filename='organisation.csv'):
         for i in departments:
             save.write('{};{};{}\n'.format(i["id"], i["name"], i["employees"]))
 
+def load_base_from_csv(filename='organisation.csv'):
+    """чтения всей базы отделов и сотрудников из файла"""
+    if os.path.isfile(filename):
+        employees.clear()
+        departments.clear()
+        rd = open(filename, 'r')
+        for line in rd:
+            spline = line.split(';')
+            if int(spline[0])<100:
+                new_record = new_record = {"id": int(spline[0]), "fio": spline[1], "salary": int(spline[2].rstrip())}
+                employees.append(new_record)
+            else:
+                new_record = {"id": int(spline[0]), "name": spline[1], "employees": spline[2].rstrip()}
+                departments.append(new_record)
+        rd.close()
+    print(departments)
+    print(employees)
