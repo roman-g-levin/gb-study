@@ -1,5 +1,3 @@
-
-
 employees = [
     {"id": 1, "fio": "ivan petrov", "salary": 40},
     {"id": 2, "fio": "bob ivanov", "salary": 50},

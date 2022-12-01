@@ -2,8 +2,9 @@ from models import *
 import ui.ui_controller
 
 def show_departments():
+    print('Номер\tНазвание отдела')
     for department in departments:
-        print(department)
+        print(f'{department["id"]}\t{department["name"]}')
 
 
 def show_employees():
