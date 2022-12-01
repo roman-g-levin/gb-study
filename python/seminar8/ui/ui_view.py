@@ -41,3 +41,9 @@ def menu():
 
 def input_department():
     return input("Введите название отдела: ")
+
+
+def display_message(txt):
+    """функция вывода текста"""
+    print(txt)
+

@@ -22,3 +22,4 @@ def main():
         input_data = MENU_ACTIONS[menu_number][1]()
         if input_data:
             MENU_ACTIONS[menu_number][2](input_data)
+
