@@ -24,10 +24,12 @@ def show_employees_in_department():
             flag_not_found=False
             print(f'Список сотрудников отдела {department["name"]}')
             print('Номер\tСотрудник\tЗарплата')
-            for employee in department["employees"]:
-                empl = [e for e in employees if e["id"]==employee]
-                print(empl)
-                #print(f' {empl[0]["id"]}\t{empl[0]["fio"]}\t{empl[0]["salary"]}')
+            #print(department["employees"])
+            for i in department["employees"]:
+                #print(i)
+                empl = [e for e in employees if e["id"]==i]
+                #print(empl)
+                print(f' {empl[0]["id"]}\t{empl[0]["fio"]}\t{empl[0]["salary"]}')
             break
     if flag_not_found:
         print(' Не найден номер отдела!')

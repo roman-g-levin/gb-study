@@ -44,8 +44,8 @@ def load_base_from_csv(filename='organisation.csv'):
                 new_record = new_record = {"id": int(spline[0]), "fio": spline[1], "salary": int(spline[2].rstrip())}
                 employees.append(new_record)
             else:
-                new_record = {"id": int(spline[0]), "name": spline[1], "employees": spline[2].rstrip()}
+                new_record = {"id": int(spline[0]), "name": spline[1], "employees": list(map(lambda s: int("".join(filter(str.isdecimal, s))),spline[2].rstrip().split(",")))}
                 departments.append(new_record)
         rd.close()
     print(departments)
-    print(employees)
+    #print(employees)
