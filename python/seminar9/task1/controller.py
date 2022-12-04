@@ -36,12 +36,6 @@ def win(a):
     """функция возвращает символ выигравшего игрока,
     ' ' - пробел если выигрыша еще нет
     '!' если все поля заполнены без выигрыша"""
-    empty=0
-    for i in range(len(a)):
-        if a[i]==' ':
-            empty+=1
-    if empty==1:
-        return '!'
     if a[1] == a[2] and a[2] == a[3] and a[3] != ' ':
         return a[3]
     elif a[4] == a[5] and a[5] == a[6] and a[6] != ' ':
@@ -59,4 +53,11 @@ def win(a):
     elif a[3] == a[5] and a[5] == a[7] and a[7] != ' ':
         return a[7]
     else:
-        return ' '
+        empty=0
+        for i in range(len(a)):
+            if a[i]==' ':
+                empty+=1
+        if empty==1:
+            return '!'
+        else:
+            return ' '
