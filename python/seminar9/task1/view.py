@@ -28,5 +28,4 @@ def menu(player):
 
 def display_message(msg):
     """функция вывода сообщения"""
-    print(msg)
     cprint(msg,RGB.RED,RGB.BLACK,Style.BOLD)
