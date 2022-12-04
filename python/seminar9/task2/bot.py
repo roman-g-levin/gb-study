@@ -6,7 +6,7 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, Conve
 # Enable logging
 from commands.base import start, player_profile_command
 from handlers.player_profile import input_player_name_handler, input_player_age_handler, PLAYER_NAME_STATE, \
-    PLAYER_AGE_STATE, PLAYER_GENDER_STATE, input_player_gender_handler
+    PLAYER_AGE_STATE, PLAYER_GENDER_STATE, input_player_gender_handler, ASK_Q_CANDIES, game_pass
 
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO
@@ -15,7 +15,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # TOKEN = "abc-....-xyz"
-# you need the file token.py with your telegram-bot token
+# you need the file my_bot_token.py with your telegram-bot token
 
 
 def main() -> None:
@@ -31,19 +31,18 @@ def main() -> None:
     dispatcher.add_handler(CommandHandler("start", start))
 
     player_profile_conv_handler = ConversationHandler(
-        entry_points=[CommandHandler('player_profile', player_profile_command)],
+        entry_points=[CommandHandler('game', player_profile_command)],
         states={
             PLAYER_NAME_STATE: [MessageHandler(Filters.text, input_player_name_handler)],
             PLAYER_AGE_STATE: [MessageHandler(Filters.text, input_player_age_handler)],
             PLAYER_GENDER_STATE: [MessageHandler(Filters.text, input_player_gender_handler)],
+            ASK_Q_CANDIES: [MessageHandler(Filters.text, game_pass)],
         },
         fallbacks=[],
     )
 
-    dispatcher.add_handler(player_profile_conv_handler)
 
-    #dispatcher.add_handler(MessageHandler(Filters.text, input_player_name_handler))
-    #dispatcher.add_handler(MessageHandler(Filters.text, input_player_age_handler))
+    dispatcher.add_handler(player_profile_conv_handler)
 
     # Start the Bot
     updater.start_polling()     # опрашиваем сервер телеграма
