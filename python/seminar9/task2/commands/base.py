@@ -8,7 +8,7 @@ import random
 def start(update: Update, context: CallbackContext) -> None:
     """Send a message when the command /start is issued."""
     user = update.effective_user
-    update.message.reply_text(f"Привет {user.first_name}!\n Список команд:\n /game\n")
+    update.message.reply_text(f"Привет {user.first_name}!\nЗапуск игры:\n /game\n")
     
 
 
