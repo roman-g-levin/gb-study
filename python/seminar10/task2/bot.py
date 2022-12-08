@@ -1,9 +1,10 @@
 import logging
 from datetime import datetime
 from telegram.ext import Updater, CommandHandler, ConversationHandler, MessageHandler, Filters, CallbackQueryHandler
-from commands import start_command, show_command
+from commands import start_command, show_command, add_command
 from handlers import SHOW_BUTTON_STATE, show_select_handler,\
-    SHOW_ASK_NAME, show_ask_name_handler, SHOW_ASK_PHONE, show_ask_phone_handler
+    SHOW_ASK_NAME, show_ask_name_handler, SHOW_ASK_PHONE, show_ask_phone_handler,\
+    ADD_ASK_NAME, add_ask_name_handler, ADD_ASK_PHONE, add_ask_phone_handler
     #op_input_handler, OP_INPUT_STATE, NUM_A_STATE, NUM_B_STATE, \
     #num_b_handler, num_a_handler
 
@@ -37,12 +38,21 @@ def main() -> None:
             SHOW_BUTTON_STATE: [MessageHandler(Filters.regex(r"1|2|3"), show_select_handler)],
             SHOW_ASK_NAME: [MessageHandler(Filters.text, show_ask_name_handler)],
             SHOW_ASK_PHONE: [MessageHandler(Filters.text, show_ask_phone_handler)]
-            #NUM_B_STATE: [MessageHandler(Filters.text, num_b_handler)]
         },
         fallbacks=[]
     )
 
     dispatcher.add_handler(show_conv_handler)
+
+    add_conv_handler = ConversationHandler(
+        entry_points=[CommandHandler('add', add_command)],
+        states={
+            ADD_ASK_NAME: [MessageHandler(Filters.text, add_ask_name_handler)],
+            ADD_ASK_PHONE: [MessageHandler(Filters.text, add_ask_phone_handler)]
+        },
+        fallbacks=[]
+    )
+    dispatcher.add_handler(add_conv_handler)
 
     # Start the Bot
     updater.start_polling()

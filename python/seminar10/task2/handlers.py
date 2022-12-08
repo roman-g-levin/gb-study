@@ -3,14 +3,15 @@ import pickle
 
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import CallbackContext, ConversationHandler
-from model import abonents
+#from model import abonents
 
 (
     SHOW_BUTTON_STATE,
     SHOW_ASK_NAME,
     SHOW_ASK_PHONE,
-    NUM_B_STATE
-) = range(4)  # [0, 1, 2, ..]
+    ADD_ASK_NAME,
+    ADD_ASK_PHONE
+) = range(5)  # [0, 1, 2, ..]
 
 
 def save_abonents(data, chat_id):
@@ -21,55 +22,37 @@ def save_abonents(data, chat_id):
 def load_abonents(chat_id):
     file_name = f'{chat_id}.pickle'
     if not os.path.exists(file_name):
-        return [{}]
+        return None
     with open(file_name, 'rb') as f:
         return pickle.load(f)
 
 
 def show_select_handler(update: Update, context: CallbackContext) -> int:
-    global abonents
-    #abonents = load_abonents(update.effective_user.id)
-
-    # выбрать режим отображения
-    text = update.message.text
-
-    if "1" in text:
-        msg = ''
-        for a in abonents:
-            msg += str(a["id"])+'. '+a["fio"]+', '+str(a["phone"])+'\n'
-        update.message.reply_text(msg)
+    abonents = load_abonents(update.effective_user.id)
+    if not abonents:
+        update.message.reply_text("Справочник пуст")
         return ConversationHandler.END
-    elif "2" in text:
-        update.message.reply_text("Введите имя:")
-        return SHOW_ASK_NAME
-    elif "3" in text:
-        update.message.reply_text("Введите номер телефона:")
-        return SHOW_ASK_PHONE
+    else:
+        # выбрать режим отображения
+        text = update.message.text
 
-    # Предложить пользователию выбрать действие InlineKeyboard
-#    kb = [
-#        [InlineKeyboardButton("A + B", callback_data="+"), InlineKeyboardButton("A - B", callback_data="-")],
-#        [InlineKeyboardButton("A * B", callback_data="*"), InlineKeyboardButton("A / B", callback_data="/")]
-#    ]
-#    reply_kb_markup = InlineKeyboardMarkup(kb)
-#    update.message.reply_text(f"{data['username']},\nВыберите операцию: ", reply_markup=reply_kb_markup)
-#    return OP_INPUT_STATE
-
-
-# def op_input_handler(update: Update, context: CallbackContext) -> int:
-
-#    data = load_data(update.effective_user.id)
-
-#    data["op"] = update.callback_query.data   # +, -
-
-#    save_data(data, update.effective_user.id)
-#    update.callback_query.message.edit_text("Введите число A: ")
-#    return NUM_A_STATE
+        if "1" in text:
+            msg = ''
+            for a in abonents:
+                msg += str(a["id"])+'. '+a["fio"]+', '+str(a["phone"])+'\n'
+            update.message.reply_text(msg)
+            return ConversationHandler.END
+        elif "2" in text:
+            update.message.reply_text("Введите имя:")
+            return SHOW_ASK_NAME
+        elif "3" in text:
+            update.message.reply_text("Введите номер телефона:")
+            return SHOW_ASK_PHONE
+        return ConversationHandler.END
 
 
 def show_ask_name_handler(update: Update, context: CallbackContext) -> int:
-    global abonents
-    #abonents = load_abonents(update.effective_user.id)
+    abonents = load_abonents(update.effective_user.id)
 
     name = update.message.text
     msg = ''
@@ -81,8 +64,7 @@ def show_ask_name_handler(update: Update, context: CallbackContext) -> int:
 
 
 def show_ask_phone_handler(update: Update, context: CallbackContext) -> int:
-    global abonents
-    #abonents = load_abonents(update.effective_user.id)
+    abonents = load_abonents(update.effective_user.id)
 
     phone = update.message.text
     msg = ''
@@ -93,7 +75,7 @@ def show_ask_phone_handler(update: Update, context: CallbackContext) -> int:
     return ConversationHandler.END
 
 
-#def num_b_handler(update: Update, context: CallbackContext) -> int:
+# def num_b_handler(update: Update, context: CallbackContext) -> int:
 #    data = load_data(update.effective_user.id)
 #    data["num_b"] = update.message.text
 
@@ -107,9 +89,52 @@ def show_ask_phone_handler(update: Update, context: CallbackContext) -> int:
 #        data["result"] = eval(f'{num_a} {data["op"]} {num_b}')
 
 #    save_data(data, update.effective_user.id)
-    #logger.info("{} Пользователь {} ввел число B {}".format(datetime.now().time(), update.effective_user.id, data["num_b"]))
-    #logger.info("{} Пользователь {} Результат вычислений {}".format(datetime.now().time(), update.effective_user.id, data["result"]))
 #    update.message.reply_text(
 #        f"{data['username']},\nРезультат вычислений: {data['result']}")
 
 #    return ConversationHandler.END
+
+def add_ask_name_handler(update: Update, context: CallbackContext) -> int:
+    abonents = load_abonents(update.effective_user.id)
+    if not abonents:
+        abonents = []
+    name = update.message.text
+    new_num = 0  # незаконченный ввод. вводим только имя
+    abonents.append({
+        "id": new_num,
+        "fio": name,
+        "phone": 0
+        })
+    save_abonents(abonents, update.effective_user.id)
+    update.message.reply_text("Введите номер телефона:")
+    print(abonents)
+    return ADD_ASK_PHONE
+
+
+def add_ask_phone_handler(update: Update, context: CallbackContext) -> int:
+    abonents = load_abonents(update.effective_user.id)
+
+    phone = update.message.text
+    if phone.isdigit():
+        phone=int(phone)
+    else:
+        update.message.reply_text("\
+            Ошибка ввода номера.\n\
+            Введите номер телефона:")
+        return ADD_ASK_PHONE
+    for i in range(len(abonents)):
+        if abonents[i]["id"] == 0:
+            name = abonents[i]["fio"]
+            abonents.pop(i)
+            new_num = abonents[-1]["id"] + 1
+            print(new_num)
+            abonents.append({
+                "id": new_num,
+                "fio": name,
+                "phone": phone
+            })
+            save_abonents(abonents, update.effective_user.id)
+            update.message.reply_text(f"Добавлен абонент:\n\
+                {new_num}. {name}, {phone}\n{abonents}")
+            break
+    return ConversationHandler.END
