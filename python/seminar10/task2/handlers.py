@@ -107,7 +107,6 @@ def add_ask_name_handler(update: Update, context: CallbackContext) -> int:
         })
     save_abonents(abonents, update.effective_user.id)
     update.message.reply_text("Введите номер телефона:")
-    print(abonents)
     return ADD_ASK_PHONE
 
 
@@ -122,12 +121,16 @@ def add_ask_phone_handler(update: Update, context: CallbackContext) -> int:
             Ошибка ввода номера.\n\
             Введите номер телефона:")
         return ADD_ASK_PHONE
+
     for i in range(len(abonents)):
         if abonents[i]["id"] == 0:
             name = abonents[i]["fio"]
-            abonents.pop(i)
-            new_num = abonents[-1]["id"] + 1
-            print(new_num)
+            if i==0:
+                new_num = abonents[-1]["id"] + 1
+                abonents.pop(i)
+            else:
+                abonents.pop(i)
+                new_num = abonents[-1]["id"] + 1
             abonents.append({
                 "id": new_num,
                 "fio": name,
@@ -135,6 +138,6 @@ def add_ask_phone_handler(update: Update, context: CallbackContext) -> int:
             })
             save_abonents(abonents, update.effective_user.id)
             update.message.reply_text(f"Добавлен абонент:\n\
-                {new_num}. {name}, {phone}\n{abonents}")
+                {new_num}. {name}, {phone}")
             break
     return ConversationHandler.END
