@@ -1,12 +1,12 @@
 import logging
 from datetime import datetime
 from telegram.ext import Updater, CommandHandler, ConversationHandler, MessageHandler, Filters, CallbackQueryHandler
-from commands import start_command, show_command, add_command, clear_command
+from commands import start_command, show_command, add_command,\
+    clear_command, del_command
 from handlers import SHOW_BUTTON_STATE, show_select_handler,\
     SHOW_ASK_NAME, show_ask_name_handler, SHOW_ASK_PHONE, show_ask_phone_handler,\
-    ADD_ASK_NAME, add_ask_name_handler, ADD_ASK_PHONE, add_ask_phone_handler
-    #op_input_handler, OP_INPUT_STATE, NUM_A_STATE, NUM_B_STATE, \
-    #num_b_handler, num_a_handler
+    ADD_ASK_NAME, add_ask_name_handler, ADD_ASK_PHONE, add_ask_phone_handler,\
+    DEL_ASK_ID, del_ask_id_handler
 
 #TOKEN = ""
 from my_bot_token import TOKEN
@@ -53,6 +53,15 @@ def main() -> None:
         fallbacks=[]
     )
     dispatcher.add_handler(add_conv_handler)
+
+    del_conv_handler = ConversationHandler(
+        entry_points=[CommandHandler('del', del_command)],
+        states={
+            DEL_ASK_ID: [MessageHandler(Filters.text, del_ask_id_handler)]
+        },
+        fallbacks=[]
+    )
+    dispatcher.add_handler(del_conv_handler)
 
     dispatcher.add_handler(CommandHandler("clear", clear_command))
 

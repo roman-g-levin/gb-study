@@ -10,8 +10,9 @@ from telegram.ext import CallbackContext, ConversationHandler
     SHOW_ASK_NAME,
     SHOW_ASK_PHONE,
     ADD_ASK_NAME,
-    ADD_ASK_PHONE
-) = range(5)  # [0, 1, 2, ..]
+    ADD_ASK_PHONE,
+    DEL_ASK_ID
+) = range(6)  # [0, 1, 2, ..]
 
 
 def save_abonents(data, chat_id):
@@ -140,4 +141,25 @@ def add_ask_phone_handler(update: Update, context: CallbackContext) -> int:
             update.message.reply_text(f"Добавлен абонент:\n\
                 {new_num}. {name}, {phone}")
             break
+    return ConversationHandler.END
+
+def del_ask_id_handler(update: Update, context: CallbackContext) -> int:
+    abonents = load_abonents(update.effective_user.id)
+
+    id = update.message.text
+    if id.isdigit():
+        id=int(id)
+    else:
+        update.message.reply_text("\
+            Ошибка ввода id!\n\
+            Введите число!")
+        return DEL_ASK_ID
+
+    for i in range(len(abonents)):
+        if abonents[i]["id"] == id:
+            abonents.pop(i)
+            save_abonents(abonents, update.effective_user.id)
+            update.message.reply_text(f"Удалена запись с id={id}")
+            return ConversationHandler.END
+    update.message.reply_text(f"Запись с id={id} не найдена!")
     return ConversationHandler.END

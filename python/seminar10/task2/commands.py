@@ -1,7 +1,8 @@
 from telegram import Update, ReplyKeyboardMarkup
 from telegram.ext import CallbackContext
 
-from handlers import SHOW_BUTTON_STATE, ADD_ASK_NAME, save_abonents
+from handlers import SHOW_BUTTON_STATE, ADD_ASK_NAME,\
+    save_abonents, DEL_ASK_ID
 
 def start_command(update: Update, context: CallbackContext) -> None:
     """Send a message when the command /start is issued."""
@@ -33,6 +34,12 @@ def add_command(update: Update, context: CallbackContext) -> int:
     update.message.reply_text("Добавление новой записи в справочник\n\
         Введите имя:")
     return ADD_ASK_NAME
+
+def del_command(update: Update, context: CallbackContext) -> int:
+    """del abonent with id"""
+    update.message.reply_text("Удаление записи в справочнике\n\
+        Введите id:")
+    return DEL_ASK_ID
 
 def clear_command(update: Update, context: CallbackContext) -> None:
     """удаление всех записей в справочнике"""
