@@ -13,6 +13,7 @@ def start_command(update: Update, context: CallbackContext) -> None:
         /start - запустить бота и показать инструкцию\n\
         /show - показать справочник\n\
         /add - добавить запись в справочник\n\
+        /del - удвлить запись из справочника\n\
         /clear - очистка всего справочника")
 
 

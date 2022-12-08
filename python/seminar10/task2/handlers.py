@@ -76,25 +76,6 @@ def show_ask_phone_handler(update: Update, context: CallbackContext) -> int:
     return ConversationHandler.END
 
 
-# def num_b_handler(update: Update, context: CallbackContext) -> int:
-#    data = load_data(update.effective_user.id)
-#    data["num_b"] = update.message.text
-
-    # выполнить рассчет и вывести ответ
-    # float(data["num_a"]) -> float('2')
-#    num_a = data["num_type"](data["num_a"])
-#    num_b = data["num_type"](data["num_b"])
-#    if data["op"] == '/' and (num_b == 0 or num_b == complex(0j)):
-#        data["result"] = "деление на 0 невозможно"
-#    else:
-#        data["result"] = eval(f'{num_a} {data["op"]} {num_b}')
-
-#    save_data(data, update.effective_user.id)
-#    update.message.reply_text(
-#        f"{data['username']},\nРезультат вычислений: {data['result']}")
-
-#    return ConversationHandler.END
-
 def add_ask_name_handler(update: Update, context: CallbackContext) -> int:
     abonents = load_abonents(update.effective_user.id)
     if not abonents:
