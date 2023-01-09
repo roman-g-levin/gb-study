@@ -1,0 +1,31 @@
+h1{
+    color: cyan;
+}
+
+h2{
+    color: yellow;
+}
+
+h3{
+    color: pink;
+}
+
+ul, ol{
+    color: magenta;
+}
+
+p {
+    color: white;
+}
+
+.line {
+ border-bottom: 1px solid #f00; /* Параметры линии */
+}
+
+html{
+    background-color:black
+}
+
+a{
+    color:yellow
+}
