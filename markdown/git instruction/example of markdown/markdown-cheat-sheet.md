@@ -29,14 +29,14 @@ These are the elements outlined in John Gruber’s original design document. All
 ### Ordered List
 
 1. First item
-2. Second item
-3. Third item
+1. Second item
+1. Third item
 
 ### Unordered List
 
-- First item
-- Second item
-- Third item
+* First item
+* Second item
+* Third item
 
 ### Code
 
@@ -53,6 +53,11 @@ These are the elements outlined in John Gruber’s original design document. All
 ### Image
 
 ![alt text](https://www.markdownguide.org/assets/images/tux.png)
+
+а еще вставим сюда фото моего котенка
+
+![киса](img_2014.jpg)
+
 
 ## Extended Syntax
 
