@@ -5,3 +5,4 @@
 
 В файлах:
 - __seminar1.md__
+- __seminar2.md__
