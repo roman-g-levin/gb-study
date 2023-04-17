@@ -7,3 +7,4 @@
 - __seminar1.md__
 - __seminar2.md__
 - __seminar3.docx__
+- __seminar4.docx__
