@@ -10,3 +10,4 @@
 - __seminar4.docx__
 - __seminar5.py__
 - __seminar6.md__
+- __seminar7.md__
