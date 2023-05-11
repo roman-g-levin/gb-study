@@ -12,3 +12,4 @@
 - __seminar6.md__
 - __seminar7.md__
 - __seminar8.ipynb__
+- __seminar9.ipynb__
