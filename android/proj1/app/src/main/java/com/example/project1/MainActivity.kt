@@ -19,7 +19,7 @@ class MainActivity : ComponentActivity() {
             Project1Theme {
                 // A surface container using the 'background' color from the theme
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-                    Greeting("Пытливый юзер!")
+                    Greeting("Пого-да-да!")
                 }
             }
         }
@@ -29,7 +29,8 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Text(
-            text = "Погода!",
+            //text = "Погода!",
+            text = name,
             modifier = modifier
     )
 }
