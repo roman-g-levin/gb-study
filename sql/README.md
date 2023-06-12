@@ -9,3 +9,4 @@
 - __seminar3.sql__
 - __seminar4.sql__
 - __seminar5.sql__
+- __seminar6.sql__
