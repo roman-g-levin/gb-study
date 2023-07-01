@@ -5,3 +5,7 @@
 
 В файлах:
 - [Семинар 1](./seminar1.md)
+
+- [Семинар 2 .pbix](./seminar2.pbix)
+- [Семинар 2 .pdf](./seminar2.pdf)
+
