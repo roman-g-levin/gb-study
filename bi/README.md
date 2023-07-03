@@ -9,3 +9,5 @@
 - [Семинар 2 .pbix](./seminar2.pbix)
 - [Семинар 2 .pdf](./seminar2.pdf)
 
+- [Семинар 3 .pbix](./seminar3.pbix)
+- [Семинар 3 .pdf](./seminar3.pdf)
