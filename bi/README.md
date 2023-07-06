@@ -11,3 +11,5 @@
 
 - [Семинар 3 .pbix](./seminar3.pbix)
 - [Семинар 3 .pdf](./seminar3.pdf)
+
+- [Семинар 4 .pbix](./seminar4.pbix)
