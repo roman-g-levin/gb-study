@@ -17,3 +17,6 @@
 - [Семинар 5 .pbix](./seminar5.pbix)
 
 - [Семинар 6 .pbix](./seminar6.pbix)
+
+- [Семинар 7 .pbix](./seminar7.pbix)
+- [Семинар 7 .pdf](./seminar7.pdf)
