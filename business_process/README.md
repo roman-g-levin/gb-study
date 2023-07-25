@@ -9,3 +9,6 @@
 - [Семинар 1](./seminar1.md)
 - [Семинар 2](./seminar2.md)
 - [Семинар 3](./decomposition_SC.xlsx)
+- [Семинар 4](./seminar4.xlsx)
+- [Семинар 4](./seminar4.pdf)
+- [Семинар 4](./seminar4.drawio)
