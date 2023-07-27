@@ -12,3 +12,5 @@
 - [Семинар 4](./seminar4.xlsx)
 - [Семинар 4](./seminar4.pdf)
 - [Семинар 4](./seminar4.drawio)
+- [Семинар 5](./seminar5.pdf)
+- [Семинар 5](./seminar5.drawio)
