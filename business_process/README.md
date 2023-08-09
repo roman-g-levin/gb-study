@@ -16,3 +16,5 @@
 - [Семинар 5](./seminar5.drawio)
 - [Семинар 6](./seminar6.pdf)
 - [Семинар 6](./seminar6.drawio)
+- [Семинар 7](./seminar7.md)
+- [Семинар 7](./seminar7.xlsx)
