@@ -18,3 +18,5 @@
 - [Семинар 6](./seminar6.drawio)
 - [Семинар 7](./seminar7.md)
 - [Семинар 7](./seminar7.xlsx)
+- [Семинар 8](./seminar8.md)
+- [Семинар 8](./seminar8.xlsx)
