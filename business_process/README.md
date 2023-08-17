@@ -20,3 +20,5 @@
 - [Семинар 7](./seminar7.xlsx)
 - [Семинар 8](./seminar8.md)
 - [Семинар 8](./seminar8.xlsx)
+- [Семинар 9](./seminar9.md)
+- [Семинар 9](./seminar9.xlsx)
