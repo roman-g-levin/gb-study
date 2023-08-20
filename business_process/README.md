@@ -25,3 +25,7 @@
 - [Семинар 10](./seminar10.md)
 - [Семинар 10](./seminar10-1.jpg)
 - [Семинар 10](./seminar10-2.jpg)
+- [Семинар 11](./seminar11.md)
+- [Семинар 11](./seminar11.xlsx)
+- [Семинар 11](./seminar11.pdf)
+
