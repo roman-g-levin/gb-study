@@ -17,7 +17,7 @@ private static final String LOGID = "myLogs";
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Toast.makeText(this,"", Toast.LENGTH_LONG).show();
+        Toast.makeText(this,"onCreate", Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -30,11 +30,13 @@ private static final String LOGID = "myLogs";
     protected void onRestart() {
         Log.d(LOGID,"onRestart called");
         super.onRestart();
+        Toast.makeText(this,"onRestart", Toast.LENGTH_LONG).show();
     }
 
     @Override
     protected void onPause() {
         Log.d(LOGID,"onPause called");
+        Toast.makeText(this,"onPause", Toast.LENGTH_LONG).show();
         super.onPause();
     }
 
@@ -42,12 +44,20 @@ private static final String LOGID = "myLogs";
     protected void onResume() {
         Log.d(LOGID,"onResume called");
         super.onResume();
+        Toast.makeText(this,"onResume", Toast.LENGTH_LONG).show();
     }
 
     @Override
     protected void onStart() {
         Log.d(LOGID,"onStart called");
         super.onStart();
+        try{
+            Toast.makeText(this,"onStart" + 5/0, Toast.LENGTH_LONG).show();
+        }catch(Exception e)
+        {
+            Log.d(LOGID, "Err", e);
+        }
+
     }
 
 }
