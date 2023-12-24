@@ -1,0 +1,148 @@
+## Задание:
+
+1. Управление пользователями:
+a) создать нового пользователя;
+b) убедиться, что информация о нем появилась в соответствующих файлах в системе;
+c) удалить созданного пользователя;
+
+2. Управление группами:
+a) создать группу;
+b) попрактиковаться в смене групп у пользователей;
+c) добавить пользователя в группу, не меняя основной;
+d) удалить пользователя из группы.
+
+3. Работа с группами.
+a) Создать пользователя с правами суперпользователя. Проверить результат.
+b) * Создать группу developer и нескольких пользователей, входящих в неё. Создать директорию для совместной работы. Сделать так, чтобы созданные одними пользователями файлы могли изменять другие пользователи этой группы.
+c) * Создать в директории для совместной работы поддиректорию для обмена файлами, но чтобы удалять файлы могли только их создатели.
+
+В качестве решения необходимо прислать текстовый файл (.txt) с набором используемых команд и их результатами (можно скопировать текст из консоли).
+Задания со звездочкой дополнительные, необязательные.
+
+Решение:
+1.
+a) создать нового пользователя;
+romanl@gb-vbox:~$ sudo useradd -m -d /home/user1 -s /bin/bash user1
+romanl@gb-vbox:~$ sudo passwd user1
+Новый пароль:
+Повторите ввод нового пароля:
+passwd: пароль успешно обновлён
+
+b) убедиться, что информация о нем появилась в соответствующих файлах в системе;
+romanl@gb-vbox:~$ cat /etc/passwd | grep user1
+user1:x:1001:1001::/home/user1:/bin/bash
+romanl@gb-vbox:~$ cat /etc/group | grep user1
+user1:x:1001:
+romanl@gb-vbox:~$ sudo cat /etc/shadow | grep user1
+user1:$y$j9T$f.bQE5uoJk8PHzG4DtKv4.$0PG4S81b0kvKYiBgmXVqsqqQ/1fKBMP00.QfmsA.i6B:19715:0:99999:7:::
+
+c) удалить созданного пользователя;
+romanl@gb-vbox:~$ sudo userdel -fr user1
+userdel: почтовый ящик user1 (/var/mail/user1) не найден
+
+
+2.
+a) создать группу;
+romanl@gb-vbox:~$ sudo addgroup workgroup
+Добавляется группа «workgroup» (GID 1002) ...
+Готово.
+
+b) попрактиковаться в смене групп у пользователей;
+romanl@gb-vbox:~$ sudo usermod -g workgroup user1
+romanl@gb-vbox:~$ cat /etc/passwd | grep user1
+user1:x:1001:1002::/home/user1:/bin/bash
+romanl@gb-vbox:~$ sudo usermod -g user1 user1
+romanl@gb-vbox:~$ cat /etc/passwd | grep user1
+user1:x:1001:1001::/home/user1:/bin/bash
+
+c) добавить пользователя в группу, не меняя основной;
+romanl@gb-vbox:~$ sudo adduser user1 workgroup
+Добавляется пользователь «user1» в группу «workgroup» ...
+Добавление пользователя user1 в группу workgroup
+Готово.
+romanl@gb-vbox:~$ cat /etc/group | grep user1
+user1:x:1001:
+workgroup:x:1002:user1
+
+d) удалить пользователя из группы.
+romanl@gb-vbox:~$ sudo deluser user1 workgroup
+Удаляется пользователь «user1» из группы «workgroup» ...
+Готово.
+romanl@gb-vbox:~$ cat /etc/group | grep user1
+user1:x:1001:
+
+
+3. Работа с группами.
+a) Создать пользователя с правами суперпользователя. Проверить результат.
+romanl@gb-vbox:~$ sudo adduser user1 sudo
+Добавляется пользователь «user1» в группу «sudo» ...
+Добавление пользователя user1 в группу sudo
+Готово.
+romanl@gb-vbox:~$ su user1
+Пароль:
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+user1@gb-vbox:/home/romanl$ sudo apt update
+[sudo] пароль для user1:
+Сущ:1 http://ru.archive.ubuntu.com/ubuntu jammy InRelease
+Сущ:2 http://ru.archive.ubuntu.com/ubuntu jammy-updates InRelease
+Сущ:3 http://ru.archive.ubuntu.com/ubuntu jammy-backports InRelease
+Пол:4 http://security.ubuntu.com/ubuntu jammy-security InRelease [110 kB]
+Получено 110 kB за 1с (82,1 kB/s)
+Чтение списков пакетов… Готово
+Построение дерева зависимостей… Готово
+Чтение информации о состоянии… Готово
+Все пакеты имеют последние версии.
+
+b) * Создать группу developer и нескольких пользователей, входящих в неё. Создать директорию для совместной работы. Сделать так, чтобы созданные одними пользователями файлы могли изменять другие пользователи этой группы.
+user1@gb-vbox:/home/romanl$ sudo addgroup developer
+Добавляется группа «developer» (GID 1003) ...
+Готово.
+romanl@gb-vbox:~$ sudo adduser user1 developer
+Добавляется пользователь «user1» в группу «developer» ...
+Добавление пользователя user1 в группу developer
+Готово.
+romanl@gb-vbox:~$ sudo adduser user2
+Добавляется пользователь «user2» ...
+Добавляется новая группа «user2» (1004) ...
+Добавляется новый пользователь «user2» (1002) в группу «user2» ...
+Создаётся домашний каталог «/home/user2» ...
+Копирование файлов из «/etc/skel» ...
+Новый пароль:
+Повторите ввод нового пароля:
+passwd: пароль успешно обновлён
+Изменение информации о пользователе user2
+Введите новое значение или нажмите ENTER для выбора значения по умолчанию
+        Полное имя []:
+        Номер комнаты []:
+        Рабочий телефон []:
+        Домашний телефон []:
+        Другое []:
+Данная информация корректна? [Y/n]
+romanl@gb-vbox:~$ sudo adduser user2 developer
+Добавляется пользователь «user2» в группу «developer» ...
+Добавление пользователя user2 в группу developer
+Готово.
+
+romanl@gb-vbox:~$ sudo mkdir /home/developers
+romanl@gb-vbox:~$ sudo chown romanl:developer /home/developers
+romanl@gb-vbox:~$ sudo chmod g+w /home/developers
+romanl@gb-vbox:~$ ll /home
+итого 24
+drwxr-xr-x  6 root   root      4096 дек 24 19:25 ./
+drwxr-xr-x 20 root   root      4096 дек 12 22:36 ../
+drwxrwxr-x  2 romanl developer 4096 дек 24 19:25 developers/
+drwxr-x--- 17 romanl romanl    4096 дек 24 19:22 romanl/
+drwxr-x---  2 user1  user1     4096 дек 24 19:19 user1/
+drwxr-x---  2 user2  user2     4096 дек 24 19:22 user2/
+
+c) * Создать в директории для совместной работы поддиректорию для обмена файлами, но чтобы удалять файлы могли только их создатели.
+romanl@gb-vbox:~$ cd /home/developers
+romanl@gb-vbox:/home/developers$ mkdir exchange
+romanl@gb-vbox:/home/developers$ chmod +t exchange
+romanl@gb-vbox:/home/developers$ ll
+итого 12
+drwxrwxr-x 3 romanl developer 4096 дек 24 19:32 ./
+drwxr-xr-x 6 root   root      4096 дек 24 19:25 ../
+drwxrwxr-t 2 romanl romanl    4096 дек 24 19:32 exchange/
