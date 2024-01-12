@@ -1,0 +1,36 @@
+## Задание:
+
+iptables
+1. Настроить iptables: разрешить подключения только на 22-й и 80-й порты.
+2. Настроить проброс портов локально с порта 80 на порт 8080.
+3. Запретить любой входящий трафик с IP-адреса 3.4.5.6.
+
+Сигналы процессам
+4. Запустите mc. Используя ps, найдите PID процесса, завершите процесс, передав ему сигнал 9.
+
+
+Решение:
+
+1. Настроить iptables: разрешить подключения только на 22-й и 80-й порты.
+$ sudo iptables -F
+$ sudo iptables -A INPUT -p tcp -m multiport --dport 22,80 -j ACCEPT
+$ sudo iptables -P INPUT DROP
+
+
+2. Настроить проброс портов локально с порта 80 на порт 8080.
+$ sudo iptables -F
+$ sudo iptables -t nat -I PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8080
+
+
+3. Запретить любой входящий трафик с IP-адреса 3.4.5.6.
+$ sudo iptables -F
+$ sudo iptables -A INPUT -s 3.4.5.6 -j DROP
+
+
+4. Запустите mc. Используя ps, найдите PID процесса, завершите процесс, передав ему сигнал 9.
+$ mc
+$ ps aux | grep mc
+gdm         1969  0.0  0.1 163872  7680 tty1     Sl   янв12   0:00 /usr/libexec/ibus-memconf
+romanl      2657  0.1  0.2  21928 10188 pts/0    S+   02:13   0:00 mc
+romanl      2686  0.0  0.0   9240  2560 pts/1    S+   02:13   0:00 grep --color=auto mc
+$ kill 2657 -s 9
