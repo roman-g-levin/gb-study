@@ -1,0 +1,43 @@
+## Задание:
+
+1. Переустановить операционную систему (по желанию, для дополнительной практики)
+2. Установить Docker.
+3. Запустить контейнер с Ubuntu.
+4. * Используя Dockerfile, собрать связку nginx + PHP-FPM в одном контейнере.
+
+
+Решение:
+
+1. Переустановить операционную систему (по желанию, для дополнительной практики)
+а зачем?
+
+
+2. Установить Docker.
+$ sudo apt install docker.io -y
+
+
+3. Запустить контейнер с Ubuntu.
+$ sudo su -
+# docker pull ubuntu
+# docker run --name ubuntu1 ubuntu
+# docker stop ubuntu1
+# docker rm ubuntu1
+# docker rmi ubuntu
+
+4. * Используя Dockerfile, собрать связку nginx + PHP-FPM в одном контейнере.
+$ mkdir my_nginx_fpm
+$ cd my_nginx_fpm
+cat > Dockerfile
+```
+FROM debian
+MAINTAINER romanl
+RUN apt-get update
+RUN apt-get install nginx -y
+RUN apt-get install php-fpm -y
+VOLUME "/var/www/html"
+EXPOSE 80
+CMD /usr/bin/nginx -g "daemon off;"
+
+```
+$ sudo docker build -t my_nginx_fpm .
+$ sudo docker run -d -p 82:80 my_nginx_fpm
