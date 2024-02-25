@@ -30,4 +30,4 @@ $ sudo snap install kicad
 test.txt.bak с использованием cron.
 $ nano test.txt
 $ crontab -e
-*/10 * * * *     cp ~/test.txt ~/test.txt.bak
+*/10 * * * *     cp /home/romanl/test.txt /home/romanl/test.txt.bak
