@@ -23,7 +23,7 @@
 * scrapy genspider fluxes "www.partsdirect.ru/for_soldering/flux_and_rosin"
 
 3,4,5:
-* в файле seminar5.ipynb проверка работы xpath
-* паук: **scrapy crawl fluxes** - создает два файла:
+* паук в файле fluxes.py
+* запуск паука: **scrapy crawl fluxes** - создает два файла:
 а) fluxes_finded.csv - обнаруженные позиции со ссылками
 б) fluxes_crawled.csv - извлеченные со страниц данные 
