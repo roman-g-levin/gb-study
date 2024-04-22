@@ -10,21 +10,20 @@
 4. Используйте Scrapy ImagesPipeline для загрузки изображений. Обязательно установите параметр IMAGES_STORE в файле settings.py. Убедитесь, что ваш паук правильно выдает элементы изображений, которые может обработать ImagesPipeline.
 5. Сохраните дополнительные сведения об изображениях (название, категория) в CSV-файле. Каждая строка должна соответствовать одному изображению и содержать URL изображения, локальный путь к файлу (после загрузки), название и категорию.
 
-
-
-
 ### Решение
-```
-1. https://www.partsdirect.ru/for_soldering/flux_and_rosin
+
+1. scrapy startproject unsplash_images
 
 2. Создание проекта:
-* scrapy startproject parts_direct_flux
-* cd parts_direct_flux
-* scrapy genspider fluxes "www.partsdirect.ru/for_soldering/flux_and_rosin"
+* cd unsplash_images
+* scrapy genspider unsplash "unsplash.com"
+* ./unsplash_images/unsplash_images/spiders/unsplash.py
+```
+3.
 
-3,4,5:
+4.
+
+5.
 * в файле seminar5.ipynb проверка работы xpath
 * паук: **scrapy crawl fluxes** - создает два файла:
-а) fluxes_finded.csv - обнаруженные позиции со ссылками
-б) fluxes_crawled.csv - извлеченные со страниц данные 
 ```
