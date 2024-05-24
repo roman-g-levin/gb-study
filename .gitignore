@@ -400,5 +400,5 @@ FodyWeavers.xsd
 *.sln.iml
 
 venv/*
-
+.venv/*
 .env
