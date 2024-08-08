@@ -11,4 +11,6 @@
 
 ### Решение
 
-Решение в файле ![seminar8.ipynb](./seminar8.ipynb)
+Попытка научить распознавать изображения кошек и собак на базе датасета tensorflow_datasets cats_vs_dogs ![Кошки и собаки.ipynb](./cats_vs_dogs.ipynb)
+
+Игры с датасетом северстали ![seminar8.ipynb](./seminar8.ipynb)
